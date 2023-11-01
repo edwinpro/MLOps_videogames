@@ -55,3 +55,19 @@ def UserForGenre(genero: str = Query(...,
 
     resultado = fa.UserForGenre(genero)
     return json.dumps(resultado, ensure_ascii=False, indent=4)
+
+@app.get(path = '/usersrecommend',
+          description = """ <font color="blue">
+                        INSTRUCCIONES<br>
+                        1. Haga clik en "Try it out".<br>
+                        2. Ingrese el año a consultar.<br>
+                        3. Scrollear a "Resposes" para ver el top 3 de juegos mas recomendado por año consultado.
+                        </font>
+                        """,
+         tags=["Consultas"])
+def UsersRecommend(anio: int = Query(..., 
+                                description="Año para obtener top 3 videojuego", 
+                                examples="EchoXSilence")):
+
+    resultado = fa.UsersRecommend(anio)
+    return json.dumps(resultado, ensure_ascii=False, indent=4)    

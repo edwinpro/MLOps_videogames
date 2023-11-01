@@ -6,7 +6,7 @@ import json
 max_playtime_by_genre_year = pd.read_parquet('Datasets/max_playtime_by_genre_year.parquet')
 max_playtime_per_genre = pd.read_parquet('Datasets/max_playtime_per_genre.parquet')
 summary_playtime_per_year = pd.read_parquet('Datasets/summary_playtime_per_year.parquet')
-
+top3_recomendados = pd.read_parquet('Datasets/top3_recomendados.parquet')
 
 def presentacion():
     '''
@@ -64,8 +64,6 @@ def PlayTimeGenre(genero: str):
     # Obtener el año con más horas jugadas para el género dado
     max_playtime_year = genre_data['release_year'].values[0] if not genre_data.empty else None
 
-
-
     # Crear el diccionario para el formato JSON
     result = {f'Año de lanzamiento con más horas jugadas para {genero.capitalize()}': str(max_playtime_year)}
 
@@ -106,6 +104,33 @@ def UserForGenre(genre: str):
         'Horas jugadas': hours_by_year
     }
 
-    return json.dumps(output, ensure_ascii=False, indent=4)
+    return output
+
+def UsersRecommend(anio):
+    # Verificar si el año proporcionado tiene datos en el DataFrame top3_recomendados
+    if anio not in top3_recomendados['release_year'].unique():
+        return f"No hay datos disponibles para el año {anio}"
+
+    # Filtrar el DataFrame top3_recomendados para el año proporcionado
+    top_games_year = top3_recomendados[top3_recomendados['release_year'] == anio]
+
+    # Verificar si hay menos de 3 juegos para el año consultado
+    if len(top_games_year) < 1:
+        return "No hay suficientes juegos para mostrar el top 3"
+
+    # Reiniciar el índice del DataFrame filtrado por año
+    top_games_year = top_games_year.reset_index(drop=True)
+
+    # Obtener el top 3 de juegos más recomendados para el año dado
+    top_3_games = top_games_year.head(3)
+
+    # Crear una lista con el formato especificado
+    top_3_list = []
+    for index, row in top_3_games.iterrows():
+        game_rank = index + 1  # Usar el índice + 1 como número de puesto
+        game_dict = {"Puesto " + str(game_rank): row['title']}
+        top_3_list.append(game_dict)
+
+    return top_3_list    
 
 

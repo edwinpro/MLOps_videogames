@@ -31,7 +31,7 @@ def home():
                         3. Scrollear a "Resposes" para ver el año con más horas jugadas para ese género.
                         </font>
                         """,
-         tags=["Consultas Generales"])
+         tags=["Consultas"])
 def PlayTimeGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
@@ -39,11 +39,9 @@ def PlayTimeGenre(genero: str = Query(...,
     genre_result = fa.PlayTimeGenre(genero)
     # Convertir el resultado a formato JSON
     json_result = json.dumps(genre_result, ensure_ascii=False)
-    return json_result.replace('\\', '')
+    return json_result
 
-    
-
-@app.get(path = '/playtimegenre',
+@app.get(path = '/userforgenre',
           description = """ <font color="blue">
                         INSTRUCCIONES<br>
                         1. Haga clik en "Try it out".<br>
@@ -51,11 +49,10 @@ def PlayTimeGenre(genero: str = Query(...,
                         3. Scrollear a "Resposes" para ver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
                         </font>
                         """,
-         tags=["Consultas Generales"])
+         tags=["Consultas"])
 def UserForGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
         
-    resultado = fa.UserForGenre(genero)
-    return resultado.replace('\\', '')
+    return fa.UserForGenre(genero)
 

@@ -28,7 +28,7 @@ def home():
                         INSTRUCCIONES<br>
                         1. Haga clik en "Try it out".<br>
                         2. Ingrese el genero a consultar.<br>
-                        3. Scrollear a "Resposes" para ver la cantidad de dinero gastado por el usuario, el porcentaje de recomendación que realiza el usuario y cantidad de items que tiene el mismo.
+                        3. Scrollear a "Resposes" para ver el año con más horas jugadas para ese género.
                         </font>
                         """,
          tags=["Consultas Generales"])
@@ -40,4 +40,22 @@ def PlayTimeGenre(genero: str = Query(...,
     # Convertir el resultado a formato JSON
     json_result = json.dumps(genre_result, ensure_ascii=False)
     return json_result.replace('\\', '')
+
+    
+
+    @app.get(path = '/playtimegenre',
+          description = """ <font color="blue">
+                        INSTRUCCIONES<br>
+                        1. Haga clik en "Try it out".<br>
+                        2. Ingrese el genero a consultar.<br>
+                        3. Scrollear a "Resposes" para ver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
+                        </font>
+                        """,
+         tags=["Consultas Generales"])
+def UserForGenre(genero: str = Query(..., 
+                                description="Genero de videojuego", 
+                                examples="EchoXSilence")):
+        
+    resultado = fa.UserForGenre(genero)
+    return resultado.replace('\\', '')
 

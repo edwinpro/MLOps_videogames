@@ -64,8 +64,10 @@ def PlayTimeGenre(genero: str):
     # Obtener el año con más horas jugadas para el género dado
     max_playtime_year = genre_data['release_year'].values[0] if not genre_data.empty else None
 
+
+
     # Crear el diccionario para el formato JSON
-    result = {f"Año de lanzamiento con más horas jugadas para {genero.capitalize()}": str(max_playtime_year)}
+    result = {f'Año de lanzamiento con más horas jugadas para {genero.capitalize()}': str(max_playtime_year)}
 
     return result
 
@@ -94,14 +96,14 @@ def UserForGenre(genre: str):
 
     # Crear un diccionario con el formato solicitado
     hours_by_year = [
-        {"Año": int(year), "Horas": int(hours)}
+        {'Año': int(year), 'Horas': int(hours)}
         for year, hours in zip(yearly_hours['release_year'], yearly_hours['playtime_total_hours'])
     ]
 
     # Formato de salida en JSON
     output = {
-        f"Usuario con más horas jugadas para Género '{genre.capitalize()}'": max_playtime_user,
-        "Horas jugadas": hours_by_year
+        f'Usuario con más horas jugadas para Género {genre.capitalize()}': max_playtime_user,
+        'Horas jugadas': hours_by_year
     }
 
     return json.dumps(output, ensure_ascii=False, indent=4)

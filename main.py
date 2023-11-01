@@ -39,4 +39,5 @@ def PlayTimeGenre(genero: str = Query(...,
     genre_result = fa.PlayTimeGenre(genero)
     # Convertir el resultado a formato JSON
     json_result = json.dumps(genre_result, ensure_ascii=False)
-    return json_result
+    return json_result.replace('\\', '')
+

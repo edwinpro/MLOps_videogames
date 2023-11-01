@@ -36,10 +36,9 @@ def PlayTimeGenre(genero: str = Query(...,
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
         
-    genre_result = fa.PlayTimeGenre(genero)
-    # Convertir el resultado a formato JSON
-    json_result = json.dumps(genre_result, ensure_ascii=False)
-    return json_result
+    resultado = fa.PlayTimeGenre(genero)
+    return json.dumps(resultado, ensure_ascii=False, indent=4)
+
 
 @app.get(path = '/userforgenre',
           description = """ <font color="blue">
@@ -53,6 +52,6 @@ def PlayTimeGenre(genero: str = Query(...,
 def UserForGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
-        
-    return fa.UserForGenre(genero)
 
+    resultado = fa.UserForGenre(genero)
+    return json.dumps(resultado, ensure_ascii=False, indent=4)

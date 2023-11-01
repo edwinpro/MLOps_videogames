@@ -43,7 +43,7 @@ def PlayTimeGenre(genero: str = Query(...,
 
     
 
-    @app.get(path = '/playtimegenre',
+@app.get(path = '/playtimegenre',
           description = """ <font color="blue">
                         INSTRUCCIONES<br>
                         1. Haga clik en "Try it out".<br>

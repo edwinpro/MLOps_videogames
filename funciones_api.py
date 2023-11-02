@@ -20,38 +20,50 @@ def presentacion():
     return '''
     <html>
         <head>
-            <title>API Steam</title>
+            <title>API Videojuegos</title>
+            <meta charset="UTF-8">
             <style>
                 body {
                     font-family: Arial, sans-serif;
                     padding: 20px;
+                    background-color: #333;
+                    color: #fff;
                 }
                 h1 {
-                    color: #333;
+                    color: #eee;
                     text-align: center;
                 }
                 p {
-                    color: #666;
                     text-align: center;
                     font-size: 18px;
                     margin-top: 20px;
                 }
+                a {
+                    color: #66b3ff; /* Cambiar el color del enlace */
+                }
+                a:hover {
+                    color: #4da6ff; /* Cambiar el color al pasar el ratón sobre el enlace */
+                }
+                span {
+                    background-color: #666; /* Cambiar el color de fondo del span */
+                    padding: 2px 5px;
+                }
             </style>
         </head>
         <body>
-            <h1>API de consultas de videojuegos de la plataforma Steam</h1>
-            <p>Bienvenido a la API de Steam donde se pueden hacer diferentes consultas sobre la plataforma de videojuegos.</p>
+            <h1>¡Bienvenido a la API de consultas sobre videojuegos de Steam!</h1>
+            <p>Explora y descubre el mundo de los videojuegos de Steam a través de nuestra plataforma de consultas</p>
             <p>INSTRUCCIONES:</p>
-            <p>Escriba <span style="background-color: lightgray;">/docs</span> a continuación de la URL actual de esta página para interactuar con la API</p>
-            <p> Visita mi perfil en <a href="https://www.linkedin.com/in/ingambcarlapezzone/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin"></a></p>
-            <p> El desarrollo de este proyecto esta en <a href="https://github.com/IngCarlaPezzone/PI1_MLOps_videojuegos"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github"></a></p>
+            <p>Para interactuar con la API haz click <a href="https://mlops-videogames.onrender.com/docs">Aquí:</a></p>
+            <p> Visita mi perfil en <a href="https://www.linkedin.com/in/edwintorre/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-blue?style=flat-square&logo=linkedin"></a></p>
+            <p> Los detalles de desarrollo de este proyecto están disponibles en <a href="https://github.com/edwinpro/MLOps_videogames"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github"></a></p>
         </body>
     </html>
     '''
 
 def PlayTimeGenre(genero: str):
     # La función PlayTimeGenre tiene por parametro 'genero', filtrará los datos por el género proporcionado
-    # y calculará el año con más horas jugadas para ese género..
+    # y calculará el año con más horas jugadas para ese género.
 
     # Convertir el género a minúsculas para hacer la comparación sin ser sensible a mayúsculas
     genero = genero.lower()

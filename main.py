@@ -70,4 +70,4 @@ def UsersRecommend(anio: int = Query(...,
                                 examples="EchoXSilence")):
 
     resultado = fa.UsersRecommend(anio)
-    return json.dumps(resultado, ensure_ascii=False, indent=4)    
+    return resultado    

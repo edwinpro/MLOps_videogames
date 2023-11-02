@@ -36,9 +36,7 @@ def PlayTimeGenre(genero: str = Query(...,
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
         
-    resultado = fa.PlayTimeGenre(genero)
-    return json.dumps(resultado, ensure_ascii=False, indent=4)
-
+    return fa.PlayTimeGenre(genero)
 
 @app.get(path = '/userforgenre',
           description = """ <font color="blue">
@@ -52,22 +50,33 @@ def PlayTimeGenre(genero: str = Query(...,
 def UserForGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
                                 examples="EchoXSilence")):
-
-    resultado = fa.UserForGenre(genero)
-    return json.dumps(resultado, ensure_ascii=False, indent=4)
+    return fa.UserForGenre(genero)
 
 @app.get(path = '/usersrecommend',
           description = """ <font color="blue">
                         INSTRUCCIONES<br>
                         1. Haga clik en "Try it out".<br>
                         2. Ingrese el año a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el top 3 de juegos mas recomendado por año consultado.
+                        3. Scrollear a "Resposes" para ver el top 3 de juegos MAS recomendado por año consultado.
                         </font>
                         """,
          tags=["Consultas"])
 def UsersRecommend(anio: int = Query(..., 
                                 description="Año para obtener top 3 videojuego", 
                                 examples="EchoXSilence")):
+    return fa.UsersRecommend(anio)
 
-    resultado = fa.UsersRecommend(anio)
-    return resultado    
+
+@app.get(path = '/usersnotrecommend',
+          description = """ <font color="blue">
+                        INSTRUCCIONES<br>
+                        1. Haga clik en "Try it out".<br>
+                        2. Ingrese el año a consultar.<br>
+                        3. Scrollear a "Resposes" para ver el top 3 de juegos MENOS recomendado por año consultado.
+                        </font>
+                        """,
+         tags=["Consultas"])
+def UsersNotRecommend(anio: int = Query(..., 
+                                description="Año para obtener top 3 videojuego menos recomendados", 
+                                examples="EchoXSilence")):
+    return fa.UsersNotRecommend(anio)

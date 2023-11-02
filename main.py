@@ -80,3 +80,17 @@ def UsersNotRecommend(anio: int = Query(...,
                                 description="Año para obtener top 3 videojuego menos recomendados", 
                                 examples="EchoXSilence")):
     return fa.UsersNotRecommend(anio)
+
+@app.get(path = '/sentimentanalysis',
+          description = """ <font color="blue">
+                        INSTRUCCIONES<br>
+                        1. Haga clik en "Try it out".<br>
+                        2. Ingrese el año a consultar.<br>
+                        3. Scrollear a "Resposes" para ver el conteo de análisis de sentimiento.
+                        </font>
+                        """,
+         tags=["Consultas"])
+def sentiment_analysis(anio: int = Query(..., 
+                                description="Año para obtener conteo de análisis de sentimiento", 
+                                examples="EchoXSilence")):
+    return fa.sentiment_analysis(anio)

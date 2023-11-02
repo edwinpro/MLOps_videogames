@@ -8,6 +8,7 @@ max_playtime_per_genre = pd.read_parquet('Datasets/max_playtime_per_genre.parque
 summary_playtime_per_year = pd.read_parquet('Datasets/summary_playtime_per_year.parquet')
 top3_recomendados = pd.read_parquet('Datasets/top3_recomendados.parquet')
 top3_no_recomendados = pd.read_parquet('Datasets/top3_no_recomendados.parquet')
+conteo_sentimientos = pd.read_parquet('Datasets/conteo_sentimientos.parquet')
 
 def presentacion():
     '''
@@ -162,3 +163,17 @@ def UsersNotRecommend(anio):
     return top_3_list
 
 
+def sentiment_analysis(año):
+    # Filtrar el DataFrame por el año dado
+    df_filtrado = conteo_sentimientos[conteo_sentimientos['release_year'] == año]
+    
+    if df_filtrado.empty:
+        return f"No hay datos disponibles para el año {año}"
+    
+    # Obtener la suma de cada sentimiento para el año dado
+    sentimientos_totales = df_filtrado[['Negativo', 'Neutral', 'Positivo']].sum()
+    
+    # Convertir el resultado en un diccionario con valores enteros
+    resultado = sentimientos_totales.astype(int).to_dict()
+    
+    return resultado

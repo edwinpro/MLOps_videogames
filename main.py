@@ -96,16 +96,3 @@ def recomendacion_juego(input_game: int = Query(...,
                                 description="ID de juego", 
                                 examples="209650")):
     return fa.recomendacion_juego(input_game)
-
-
-""" @app.get(path = '/recomendacionusuario',
-          description = """ <font color="blue">
-                        Recomendación user-item<br>
-                        Ingresando el id de un usuario, deberíamos recibir una lista con 5 juegos recomendados para dicho usuario.
-                        </font>
-                        """,
-         tags=["Recomendaciones"])
-def recomendacion_usuario(input_user: str = Query(..., 
-                                description="ID de usuario", 
-                                examples="Scalarius")):
-    return fa.recomendacion_usuario(input_user) """

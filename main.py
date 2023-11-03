@@ -97,7 +97,7 @@ def recomendacion_juego(input_game: int = Query(...,
                                 examples="249130")):
     return fa.recomendacion_juego(input_game)
 
-
+""" 
 @app.get(path = '/recomendacionusuario',
           description = """ <font color="blue">
                         Recomendación user-item<br>
@@ -108,4 +108,4 @@ def recomendacion_juego(input_game: int = Query(...,
 def recomendacion_usuario(input_user: str = Query(..., 
                                 description="ID de usuario", 
                                 examples="kube134")):
-    return fa.recomendacion_usuario(input_user)
+    return fa.recomendacion_usuario(input_user) """

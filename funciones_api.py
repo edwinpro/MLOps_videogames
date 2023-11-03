@@ -10,7 +10,7 @@ top3_recomendados = pd.read_parquet('Datasets/top3_recomendados.parquet')
 top3_no_recomendados = pd.read_parquet('Datasets/top3_no_recomendados.parquet')
 conteo_sentimientos = pd.read_parquet('Datasets/conteo_sentimientos.parquet')
 # Cargar datos para el sistema de recomendacion
-df_modelo = pd.read_parquet('Datasets/recomendacion.parquet')
+# df_modelo = pd.read_parquet('Datasets/recomendacion.parquet')
 item_vectors  = pd.read_parquet('Datasets/item_vectors.parquet')
 unique_item_ids  = pd.read_parquet('Datasets/unique_item_ids.parquet')
 user_vectors  = pd.read_parquet('Datasets/user_vectors.parquet')
@@ -215,7 +215,7 @@ def recomendacion_juego(input_game):
     
     return recommended_games
 
-def recomendacion_usuario(input_user: str):
+""" def recomendacion_usuario(input_user: str):
     input_user = str(input_user)
 
     vector_usuario = user_vectors.loc[input_user].values.reshape(1, -1)
@@ -236,4 +236,4 @@ def recomendacion_usuario(input_user: str):
     #juegos_recomendados_nombres = [id_name_map[item_id] for item_id in recommended_games]
     juegos_recomendados_nombres = unique_item_ids[unique_item_ids['item_id'].isin(recommended_games)]['item_name'].tolist()
     
-    return juegos_recomendados_nombres
+    return juegos_recomendados_nombres """

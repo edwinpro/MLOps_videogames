@@ -13,7 +13,7 @@ conteo_sentimientos = pd.read_parquet('Datasets/conteo_sentimientos.parquet')
 # df_modelo = pd.read_parquet('Datasets/recomendacion.parquet')
 item_vectors  = pd.read_parquet('Datasets/item_vectors.parquet')
 unique_item_ids  = pd.read_parquet('Datasets/unique_item_ids.parquet')
-user_vectors  = pd.read_parquet('Datasets/user_vectors.parquet')
+#user_vectors  = pd.read_parquet('Datasets/user_vectors.parquet')
 
 
 def presentacion():
@@ -197,6 +197,9 @@ def sentiment_analysis(año):
     return resultado
 
 def recomendacion_juego(input_game):
+    if input_game not in unique_item_ids['item_id'].unique():
+        return f"No hay datos disponibles para el Id: {input_game}"
+    
     # Encontrar el vector de ítem correspondiente para el juego de entrada
     input_game_vector = item_vectors.loc[input_game].values.reshape(1, -1)
     

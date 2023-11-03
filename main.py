@@ -31,7 +31,7 @@ def home():
          tags=["Consultas"])
 def PlayTimeGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
-                                examples="Action")):
+                                example="Action")):
         
     return fa.PlayTimeGenre(genero)
 
@@ -44,7 +44,7 @@ def PlayTimeGenre(genero: str = Query(...,
          tags=["Consultas"])
 def UserForGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
-                                examples="Indie")):
+                                example="Indie")):
     return fa.UserForGenre(genero)
 
 @app.get(path = '/usersrecommend',
@@ -56,7 +56,7 @@ def UserForGenre(genero: str = Query(...,
          tags=["Consultas"])
 def UsersRecommend(anio: int = Query(..., 
                                 description="Año a consultar.", 
-                                examples="2015")):
+                                example="2015")):
     return fa.UsersRecommend(anio)
 
 
@@ -69,7 +69,7 @@ def UsersRecommend(anio: int = Query(...,
          tags=["Consultas"])
 def UsersNotRecommend(anio: int = Query(..., 
                                 description="Año a consultar.", 
-                                examples="2015")):
+                                example="2015")):
     return fa.UsersNotRecommend(anio)
 
 @app.get(path = '/sentimentanalysis',
@@ -81,7 +81,7 @@ def UsersNotRecommend(anio: int = Query(...,
          tags=["Consultas"])
 def sentiment_analysis(anio: int = Query(..., 
                                 description="Año para obtener conteo de reseñas", 
-                                examples="2015")):
+                                example="2014")):
     return fa.sentiment_analysis(anio)
 
 
@@ -94,5 +94,5 @@ def sentiment_analysis(anio: int = Query(...,
          tags=["Recomendaciones"])
 def recomendacion_juego(input_game: int = Query(..., 
                                 description="ID de juego", 
-                                examples="209650")):
+                                example="209650")):
     return fa.recomendacion_juego(input_game)

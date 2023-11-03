@@ -8,6 +8,8 @@
 
 # Proyecto MLOPs: Sistema de Recomendación VideoJuegos
 
+![Portada](https://github.com/edwinpro/MLOps_videogames/blob/main/images/MLOps.png?raw=true)
+
 ## Introducción
 
 El desafío del presente proyecto implica desempeñar el rol combinado de un ingeniero MLOps, que une las funciones de un ingeniero de datos y un científico de datos, para la famosa plataforma de juegos, Steam. El objetivo es crear un Producto Mínimo Viable que incluya una API desplegada en la nube y la implementación de dos modelos de Machine Learning. Estos modelos tienen la tarea de realizar un análisis de sentimientos sobre las opiniones de los usuarios en los juegos, además de recomendar juegos basados en el nombre de un juego específico o en las preferencias de un usuario en particular.

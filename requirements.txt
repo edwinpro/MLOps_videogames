@@ -3,4 +3,5 @@ numpy
 pandas
 uvicorn
 scikit-learn
+pyarrow
 

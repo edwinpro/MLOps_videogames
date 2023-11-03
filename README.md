@@ -76,6 +76,8 @@ El desarrollo para la creación de los dos modelos se presenta en la Jupyter Not
 
 ### Desarrollo de API
 
+![InterfaceAPI](https://github.com/edwinpro/MLOps_videogames/blob/main/images/API_Screen.PNG?raw=true)
+
 Para el desarrolo de la API se decidió utilizar el framework FastAPI, creando las siguientes funciones:
 
 - **PlayTimeGenre**: Esta función recibe como parametro 'genero', filtrará los datos por el género proporcionado y calculará el año con más horas jugadas para ese género.

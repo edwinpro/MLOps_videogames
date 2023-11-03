@@ -94,11 +94,11 @@ def sentiment_analysis(anio: int = Query(...,
          tags=["Recomendaciones"])
 def recomendacion_juego(input_game: int = Query(..., 
                                 description="ID de juego", 
-                                examples="249130")):
+                                examples="209650")):
     return fa.recomendacion_juego(input_game)
 
-""" 
-@app.get(path = '/recomendacionusuario',
+
+""" @app.get(path = '/recomendacionusuario',
           description = """ <font color="blue">
                         Recomendación user-item<br>
                         Ingresando el id de un usuario, deberíamos recibir una lista con 5 juegos recomendados para dicho usuario.
@@ -107,5 +107,5 @@ def recomendacion_juego(input_game: int = Query(...,
          tags=["Recomendaciones"])
 def recomendacion_usuario(input_user: str = Query(..., 
                                 description="ID de usuario", 
-                                examples="kube134")):
+                                examples="Scalarius")):
     return fa.recomendacion_usuario(input_user) """

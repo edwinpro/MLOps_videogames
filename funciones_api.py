@@ -10,10 +10,10 @@ top3_recomendados = pd.read_parquet('Datasets/top3_recomendados.parquet')
 top3_no_recomendados = pd.read_parquet('Datasets/top3_no_recomendados.parquet')
 conteo_sentimientos = pd.read_parquet('Datasets/conteo_sentimientos.parquet')
 # Cargar datos para el sistema de recomendacion
-df_modelo = pd.read_parquet('../Datasets/recomendacion.parquet')
-item_vectors  = pd.read_parquet('../Datasets/item_vectors.parquet')
-unique_item_ids  = pd.read_parquet('../Datasets/unique_item_ids.parquet')
-user_vectors  = pd.read_parquet('../Datasets/user_vectors.parquet')
+df_modelo = pd.read_parquet('Datasets/recomendacion.parquet')
+item_vectors  = pd.read_parquet('Datasets/item_vectors.parquet')
+unique_item_ids  = pd.read_parquet('Datasets/unique_item_ids.parquet')
+user_vectors  = pd.read_parquet('Datasets/user_vectors.parquet')
 
 
 def presentacion():

@@ -1,6 +1,6 @@
 # Importaciones
 import pandas as pd
-import json
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Datos a usar desde los archivos Parquet
 max_playtime_by_genre_year = pd.read_parquet('Datasets/max_playtime_by_genre_year.parquet')
@@ -9,6 +9,12 @@ summary_playtime_per_year = pd.read_parquet('Datasets/summary_playtime_per_year.
 top3_recomendados = pd.read_parquet('Datasets/top3_recomendados.parquet')
 top3_no_recomendados = pd.read_parquet('Datasets/top3_no_recomendados.parquet')
 conteo_sentimientos = pd.read_parquet('Datasets/conteo_sentimientos.parquet')
+# Cargar datos para el sistema de recomendacion
+df_modelo = pd.read_parquet('../Datasets/recomendacion.parquet')
+item_vectors  = pd.read_parquet('../Datasets/item_vectors.parquet')
+unique_item_ids  = pd.read_parquet('../Datasets/unique_item_ids.parquet')
+user_vectors  = pd.read_parquet('../Datasets/user_vectors.parquet')
+
 
 def presentacion():
     '''
@@ -189,3 +195,45 @@ def sentiment_analysis(año):
     resultado = sentimientos_totales.astype(int).to_dict()
     
     return resultado
+
+def recomendacion_juego(input_game):
+    # Encontrar el vector de ítem correspondiente para el juego de entrada
+    input_game_vector = item_vectors.loc[input_game].values.reshape(1, -1)
+    
+    # Calcular la similitud del coseno entre el vector del juego de entrada y todos los demás vectores de ítems
+    similarities = cosine_similarity(input_game_vector, item_vectors.values)
+    
+    # Ordenar los puntajes de similitud del coseno en orden descendente
+    similar_games_indices = similarities.argsort()[0][::-1]
+    similar_games_indices = similar_games_indices[1:]  # Excluir el primer índice (el juego de entrada)
+    
+    # Seleccionar los mejores N juegos con los puntajes de similitud del coseno más altos como juegos recomendados
+    recommended_game_ids = item_vectors.index[similar_games_indices][:5]
+    
+    # Obtener los nombres de los juegos recomendados, considerando solo un registro por 'item_id'
+    recommended_games = unique_item_ids[unique_item_ids['item_id'].isin(recommended_game_ids)]['item_name'].tolist()
+    
+    return recommended_games
+
+def recomendacion_usuario(input_user: str):
+    input_user = str(input_user)
+
+    vector_usuario = user_vectors.loc[input_user].values.reshape(1, -1)
+    similarities = cosine_similarity(vector_usuario, user_vectors.values)
+
+    similar_users_indices = similarities.argsort()[0][::-1]
+    top_similar_users = user_vectors.index[similar_users_indices][:5]
+
+    recommended_games = []
+    for user in top_similar_users:
+        games = df_modelo.loc[df_modelo['user_id'] == user, 'item_id'].tolist()
+        recommended_games.extend(games)
+
+    recommended_games = list(set(recommended_games))
+    recommended_games.sort(key=lambda x: user_vectors.loc[top_similar_users, x].mean(), reverse=True)
+    recommended_games = recommended_games[:5]
+
+    #juegos_recomendados_nombres = [id_name_map[item_id] for item_id in recommended_games]
+    juegos_recomendados_nombres = unique_item_ids[unique_item_ids['item_id'].isin(recommended_games)]['item_name'].tolist()
+    
+    return juegos_recomendados_nombres

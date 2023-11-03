@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse
-import json
 import funciones_api as fa
 
 import importlib
@@ -25,72 +24,88 @@ def home():
 
 @app.get(path = '/playtimegenre',
           description = """ <font color="blue">
-                        INSTRUCCIONES<br>
-                        1. Haga clik en "Try it out".<br>
-                        2. Ingrese el genero a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el año con más horas jugadas para ese género.
+                        Año con más horas jugadas<br>
+                        Devuelve año con mas horas jugadas para dicho género.
                         </font>
                         """,
          tags=["Consultas"])
 def PlayTimeGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
-                                examples="EchoXSilence")):
+                                examples="Action")):
         
     return fa.PlayTimeGenre(genero)
 
 @app.get(path = '/userforgenre',
           description = """ <font color="blue">
-                        INSTRUCCIONES<br>
-                        1. Haga clik en "Try it out".<br>
-                        2. Ingrese el genero a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
+                        Usuario con más horas jugadas<br>
+                        Devuelve el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
                         </font>
                         """,
          tags=["Consultas"])
 def UserForGenre(genero: str = Query(..., 
                                 description="Genero de videojuego", 
-                                examples="EchoXSilence")):
+                                examples="Indie")):
     return fa.UserForGenre(genero)
 
 @app.get(path = '/usersrecommend',
           description = """ <font color="blue">
-                        INSTRUCCIONES<br>
-                        1. Haga clik en "Try it out".<br>
-                        2. Ingrese el año a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el top 3 de juegos MAS recomendado por año consultado.
+                        MAS recomendados<br>
+                        Devuelve el top 3 de juegos MÁS recomendados por usuarios para el año dado.
                         </font>
                         """,
          tags=["Consultas"])
 def UsersRecommend(anio: int = Query(..., 
-                                description="Año para obtener top 3 videojuego", 
-                                examples="EchoXSilence")):
+                                description="Año a consultar.", 
+                                examples="2015")):
     return fa.UsersRecommend(anio)
 
 
 @app.get(path = '/usersnotrecommend',
           description = """ <font color="blue">
-                        INSTRUCCIONES<br>
-                        1. Haga clik en "Try it out".<br>
-                        2. Ingrese el año a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el top 3 de juegos MENOS recomendado por año consultado.
+                        MENOS recomendados<br>
+                        Devuelve el top 3 de juegos MENOS recomendados por usuarios para el año dado.
                         </font>
                         """,
          tags=["Consultas"])
 def UsersNotRecommend(anio: int = Query(..., 
-                                description="Año para obtener top 3 videojuego menos recomendados", 
-                                examples="EchoXSilence")):
+                                description="Año a consultar.", 
+                                examples="2015")):
     return fa.UsersNotRecommend(anio)
 
 @app.get(path = '/sentimentanalysis',
           description = """ <font color="blue">
-                        INSTRUCCIONES<br>
-                        1. Haga clik en "Try it out".<br>
-                        2. Ingrese el año a consultar.<br>
-                        3. Scrollear a "Resposes" para ver el conteo de análisis de sentimiento.
+                        Reseñas de usuarios<br>
+                        Devuelve una lista con la cantidad de reseñas de usuarios que se encuentren categorizados.
                         </font>
                         """,
          tags=["Consultas"])
 def sentiment_analysis(anio: int = Query(..., 
-                                description="Año para obtener conteo de análisis de sentimiento", 
-                                examples="EchoXSilence")):
+                                description="Año para obtener conteo de reseñas", 
+                                examples="2015")):
     return fa.sentiment_analysis(anio)
+
+
+@app.get(path = '/recomendacionjuego',
+          description = """ <font color="blue">
+                        Recomendación item-item<br>
+                        Ingresando el id de juego, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado.
+                        </font>
+                        """,
+         tags=["Recomendaciones"])
+def recomendacion_juego(input_game: int = Query(..., 
+                                description="ID de juego", 
+                                examples="249130")):
+    return fa.recomendacion_juego(input_game)
+
+
+@app.get(path = '/recomendacionusuario',
+          description = """ <font color="blue">
+                        Recomendación user-item<br>
+                        Ingresando el id de un usuario, deberíamos recibir una lista con 5 juegos recomendados para dicho usuario.
+                        </font>
+                        """,
+         tags=["Recomendaciones"])
+def recomendacion_usuario(input_user: str = Query(..., 
+                                description="ID de usuario", 
+                                examples="kube134")):
+    return fa.recomendacion_usuario(input_user)
